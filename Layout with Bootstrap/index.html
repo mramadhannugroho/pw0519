@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-route.js"></script>
+
+	<title></title>
+</head>
+<body>
+
+	
+
+	<div ng-app="myApp" class="container">
+
+		<div class="row">
+			<div class="col-12 header">
+				<h1>MRAMADHAN NUGROHO</h1>
+				<p>{{ 5*5 }}</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-12 menu">
+				<ul>
+					<li><a href="#!"><i class="fas fa-home"></i> home</a></li>
+					<li><a href="#!profile"><i class="fas fa-user-circle"></i> profil</a></li>
+					<li><a href="#!about"><i class="fas fa-info-circle"></i> about</a></li>
+					<li><a href="#!contact"><i class="fas fa-phone-volume"></i> contact us</a></li>
+				</ul>
+			</div>
+		</div>	
+
+
+	<!-- 	<div class="row">
+		    <div class="col-12">Column</div>
+		</div>
+
+		<div class="row">
+		    <div class="col-6 bg-warning">Column</div>
+		    <div class="col-6 bg-success">Column</div>
+		</div> -->
+
+		<div ng-view class="row">
+		    
+		</div>
+
+
+
+				<script>
+					var app = angular.module("myApp", ["ngRoute"]);
+					app.config(function($routeProvider) {
+					    $routeProvider
+					    .when("/", {
+					        templateUrl : "home.htm"
+					    })
+					    .when("/profile", {
+					        templateUrl : "profile.htm"
+					    })
+					    .when("/about", {
+					        templateUrl : "about.htm"
+					    })
+					    .when("/contact", {
+					        templateUrl : "contact.htm"
+					    });
+					});
+				</script>
+
+	</div>
+</body>
+</html>
