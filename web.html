@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+    <style>
+        html,body{
+            margin: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {background-color: #f2f2f2;}
+
+        .container{
+
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+
+        .judul{
+            background-color: #42c5f4;
+            width: 100%;
+            padding: 5px;
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="container" ng-app="json" ng-controller="dallas"> 
+
+        <div class="judul">
+            
+            <h2>{{ a.main}}</h2>
+            <h3>{{ a.sub}}</h3>
+        </div>
+
+        <table>
+        <tr>
+            <th>No</th>
+            <th>Nama Lengkap</th>
+            <th>Pos</th>
+            <th>Start</th>
+            <th>Sallary</th>
+        </tr>
+        <tr ng-repeat="c in b">
+            <td>{{ $index + 1 }}</td>
+            <td>{{ c.name }}</td>
+            <td>{{ c.pos }}</td>
+            <td>{{ c.start }}</td>
+            <td>{{ c.sallary | currency : "US$ " : 0}}</td>
+        </tr>
+        <tr>
+            <th colspan="4">Total Sallary</th>
+            <td>{{ total() | currency : "US$ " : 0}}</td>
+        </tr>
+        </table>
+
+    </div>
+
+    <script>
+    var app = angular.module('json', []);
+
+    app.controller('dallas', function($scope, $http) {
+        $http.get("https://api.myjson.com/bins/8nts4")
+        .then(function (response){
+            $scope.a = response.data.title;
+            $scope.b = response.data.data;
+            
+            $scope.total = function(){
+                var sum = 0;
+                for (var i = 0; i < $scope.b.length; i++){
+                    var masukan = $scope.b[i];
+                    sum += (masukan.sallary);
+                }
+                return sum;
+            };
+
+        });
+    });
+    </script>
+
+</body>
+</html>
